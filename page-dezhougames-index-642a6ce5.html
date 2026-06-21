@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>稳定之局 · 德州扑克游戏介绍</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fde5d0 0%, #f7d4b0 35%, #f3c69e 70%, #edb687 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.65;
+            color: #2e241e;
+        }
+
+        .card {
+            max-width: 780px;
+            width: 100%;
+            background: #fffffaf5;
+            backdrop-filter: blur(2px);
+            border-radius: 42px;
+            padding: 2.8rem 2.6rem;
+            box-shadow: 0 20px 40px -12px rgba(110, 60, 30, 0.25),
+                        0 8px 16px -8px rgba(60, 30, 10, 0.15);
+            transition: box-shadow 0.25s;
+        }
+
+        .card:hover {
+            box-shadow: 0 24px 48px -14px rgba(130, 70, 30, 0.30);
+        }
+
+        /* 开场短句 */
+        .opening-line {
+            font-size: 1.9rem;
+            font-weight: 380;
+            letter-spacing: 1px;
+            color: #4e3a2b;
+            border-left: 5px solid #d9a57b;
+            padding-left: 1.2rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.3;
+        }
+
+        .opening-line span {
+            font-weight: 520;
+            color: #7b4f2c;
+        }
+
+        /* 承接段落 */
+        .lead {
+            font-size: 1.08rem;
+            background: #f5ede6;
+            padding: 1.2rem 1.6rem;
+            border-radius: 28px;
+            margin-bottom: 2.2rem;
+            color: #3a2c22;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .lead strong {
+            color: #7a4b26;
+            font-weight: 550;
+        }
+
+        /* 特点列表 */
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.5rem;
+            margin: 2.2rem 0 2.4rem;
+        }
+
+        .feature-item {
+            flex: 1 1 200px;
+            background: #fef9f3;
+            border-radius: 28px;
+            padding: 1.2rem 1.4rem;
+            box-shadow: 0 2px 8px rgba(150, 90, 40, 0.08);
+            border: 1px solid #f3e4d7;
+            transition: background 0.2s;
+        }
+
+        .feature-item:hover {
+            background: #fcf1e7;
+        }
+
+        .feature-item h3 {
+            font-size: 1.15rem;
+            font-weight: 520;
+            margin-bottom: 0.35rem;
+            color: #5d3d24;
+            letter-spacing: 0.3px;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #4f3b2d;
+        }
+
+        /* 应用场景/使用说明（以温和提示形式） */
+        .scene-note {
+            background: #efe5db;
+            border-radius: 32px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.8rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0.8rem 1.2rem;
+        }
+
+        .scene-note .label {
+            font-weight: 520;
+            color: #6d4b2c;
+            font-size: 1rem;
+            min-width: 4.2rem;
+        }
+
+        .scene-note .desc {
+            flex: 1;
+            font-size: 0.98rem;
+            color: #3f2e21;
+        }
+
+        .scene-note .desc a {
+            color: #7a4b26;
+            text-decoration: none;
+            font-weight: 520;
+            border-bottom: 1px dashed #c8a585;
+            transition: border 0.2s, color 0.2s;
+        }
+
+        .scene-note .desc a:hover {
+            border-bottom: 1px solid #7a4b26;
+            color: #57371d;
+        }
+
+        /* FAQ 摘要 — 简练问答 */
+        .faq-mini {
+            margin: 2.2rem 0 1.8rem;
+            border-top: 1px solid #e7d6c8;
+            padding-top: 1.6rem;
+        }
+
+        .qa-pair {
+            margin-bottom: 1rem;
+        }
+
+        .qa-pair .q {
+            font-weight: 530;
+            color: #5d3d24;
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .qa-pair .q::before {
+            content: "▸";
+            color: #b7875c;
+        }
+
+        .qa-pair .a {
+            padding-left: 1.8rem;
+            font-size: 0.95rem;
+            color: #4b3829;
+        }
+
+        .qa-pair .a a {
+            color: #7a4b26;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #c8a585;
+        }
+
+        .qa-pair .a a:hover {
+            border-bottom: 1px solid #7a4b26;
+        }
+
+        /* 温和结尾 */
+        .closing {
+            margin-top: 2.4rem;
+            padding: 1rem 0 0.2rem;
+            border-top: 1px solid #e5d3c3;
+            font-size: 0.98rem;
+            color: #4e3829;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.8rem;
+        }
+
+        .closing .left {
+            font-style: normal;
+            letter-spacing: 0.3px;
+        }
+
+        .closing .right {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            .card {
+                padding: 1.8rem 1.4rem;
+                border-radius: 32px;
+            }
+            .opening-line {
+                font-size: 1.5rem;
+                padding-left: 0.9rem;
+            }
+            .lead {
+                padding: 1rem 1.2rem;
+                font-size: 1rem;
+            }
+            .feature-item {
+                flex: 1 1 100%;
+            }
+            .scene-note {
+                flex-direction: column;
+                padding: 1.2rem;
+            }
+            .closing {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                padding: 1.4rem 1rem;
+            }
+            .opening-line {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+        <!-- 开场短句 -->
+        <div class="opening-line">
+            从一局牌开始，<br><span>找到属于你的稳定入口。</span>
+        </div>
+
+        <!-- 承接段落 - 说明与描述 -->
+        <div class="lead">
+            <strong>德州扑克游戏</strong> 之所以让人愿意反复坐下来，不只是因为手牌的偶然性，更在于决策、节奏、以及对局中细微的阅读。这个页面整理了关于 <strong>德州扑克游戏</strong> 的基本轮廓、常见考虑和一些值得留意的情景——希望成为你了解或重温这项活动的平稳起点。
+        </div>
+
+        <!-- 特点列表 -->
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>公共牌结构</h3>
+                <p>翻牌、转牌、河牌——逐步展开的信息，让每一轮选择都有新的依据。</p>
+            </div>
+            <div class="feature-item">
+                <h3>位置与次序</h3>
+                <p>按钮位、大小盲……座位顺序影响信息量，也改变决策权重。</p>
+            </div>
+            <div class="feature-item">
+                <h3>下注模式</h3>
+                <p>过牌、下注、加注、弃牌：简单动作背后是对底池和对手的判断。</p>
+            </div>
+            <div class="feature-item">
+                <h3>手牌范围</h3>
+                <p>同花连张、口袋对、高张……起手牌的选择定义了后续的路线。</p>
+            </div>
+        </div>
+
+        <!-- 应用场景 / 提示（温和插入链接） -->
+        <div class="scene-note">
+            <span class="label">💡 说明</span>
+            <div class="desc">
+                无论你是刚接触规则，还是想重温牌局逻辑，可以从 <a href="https://page-dezhougames.com">德州扑克游戏</a> 的基础资料整理开始。其中的牌型顺序、行动轮次以及常见术语都做了平实梳理，适合作为参考笔记。
+            </div>
+        </div>
+
+        <!-- FAQ 摘要（2–3个，保持真实克制） -->
+        <div class="faq-mini">
+            <div class="qa-pair">
+                <div class="q">盲注结构如何影响节奏？</div>
+                <div class="a">随着盲注级别提升，底池相对于筹码的比例变化，会促使更频繁的决策。不同比赛或现金局有各自的盲注时间表，可以按需调整。</div>
+            </div>
+            <div class="qa-pair">
+                <div class="q">位置为什么常被强调？</div>
+                <div class="a">靠后位置能看到更多玩家的行动后再做决定，信息更充分。因此按钮位（BTN）通常被认为是最有优势的位置之一。</div>
+            </div>
+            <div class="qa-pair">
+                <div class="q">有没有简单的起手牌参考？</div>
+                <div class="a">许多玩家会从口袋对、高张（AK、AQ）以及同花连张开始熟悉。具体选择还取决于人数、筹码深度和风格。更详细的分类可以参考 <a href="https://page-dezhougames.com">德州扑克游戏</a> 中的手牌表格。</div>
+            </div>
+        </div>
+
+        <!-- 温和结尾 -->
+        <div class="closing">
+            <div class="left">整理这些内容，是为了让进入这局的人多一分清楚，少一分犹豫。</div>
+            <div class="right">© 页面笔记 · 德州扑克游戏</div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MK体育 · 持续关注的资讯平台</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #faf8f5;
+      font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+      color: #2e2b28;
+      padding: 2rem 1.5rem;
+    }
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      padding: 2.5rem 2rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #1f1b18;
+      margin-bottom: 0.25rem;
+      line-height: 1.2;
+    }
+    .subhead {
+      font-size: 1rem;
+      color: #7a716b;
+      border-left: 4px solid #cbb7a8;
+      padding-left: 1rem;
+      margin: 0.5rem 0 1.8rem 0;
+    }
+    /* 主视觉卡片：再次访问的起点 */
+    .hero-card {
+      background: #f5f0eb;
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .hero-text {
+      flex: 2 1 240px;
+    }
+    .hero-text h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #221d19;
+      margin-bottom: 0.6rem;
+    }
+    .hero-text p {
+      color: #3f3a36;
+      font-size: 0.95rem;
+    }
+    .hero-visual {
+      flex: 1 1 120px;
+      background: #e3d8cf;
+      border-radius: 14px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      letter-spacing: 0.1em;
+      color: #4e443c;
+      font-weight: 300;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.03);
+    }
+    /* 用途卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0 1.8rem 0;
+    }
+    .card {
+      background: #fcfaf8;
+      border: 1px solid #ebe5df;
+      border-radius: 18px;
+      padding: 1.4rem 1.2rem;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(80, 60, 40, 0.06);
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+      color: #2e2824;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #5a524b;
+    }
+    .card .icon-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #9a8c80;
+      margin-bottom: 0.3rem;
+    }
+    /* 适合人群区块 */
+    .audience-box {
+      background: #f0ece7;
+      border-radius: 20px;
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .audience-box h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #211d19;
+      margin-bottom: 0.8rem;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 0.9rem;
+    }
+    .tag {
+      background: #ffffffd9;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #3b3530;
+      border: 1px solid #d5cdc4;
+      backdrop-filter: blur(2px);
+    }
+    /* 引用块 / 提示框 */
+    .inset-quote {
+      background: #f8f4ef;
+      border-left: 5px solid #b4a193;
+      padding: 1.2rem 1.6rem;
+      border-radius: 0 16px 16px 0;
+      margin: 1.8rem 0;
+      font-size: 0.95rem;
+      color: #3d3732;
+    }
+    .inset-quote strong {
+      color: #1f1b18;
+      font-weight: 500;
+    }
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #ffffff;
+      border: 1px solid #e7dfd8;
+      border-radius: 18px;
+      padding: 1.5rem 1.8rem;
+      margin: 1.8rem 0;
+      font-size: 0.98rem;
+    }
+    .link-paragraph a {
+      color: #6f5c4b;
+      text-decoration: none;
+      border-bottom: 1px solid #dccfc4;
+      font-weight: 500;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .link-paragraph a:hover {
+      border-bottom-color: #6f5c4b;
+      color: #2f2822;
+    }
+    /* FAQ 摘要（简短） */
+    .faq-mini {
+      margin: 2.2rem 0 1.2rem 0;
+    }
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eeebe7;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-q {
+      font-weight: 500;
+      color: #2b2622;
+      font-size: 0.95rem;
+    }
+    .faq-a {
+      color: #5a524b;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    .faq-a a {
+      color: #6f5c4b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: #d0c3b8;
+    }
+    /* 收藏提示小条 */
+    .bookmark-tip {
+      display: inline-block;
+      background: #e9dfd6;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      color: #4b413a;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+    }
+    /* 响应式 */
+    @media (max-width: 520px) {
+      .page { padding: 1.8rem 1.2rem; }
+      h1 { font-size: 1.7rem; }
+      .hero-card { flex-direction: column; text-align: center; }
+      .hero-visual { width: 100%; height: 80px; }
+    }
+    @media (min-width: 780px) {
+      .hero-text h2 { font-size: 1.7rem; }
+    }
+    /* 微装饰 */
+    hr {
+      border: none;
+      border-top: 1px solid #e8e1d9;
+      margin: 2rem 0 0.8rem 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 标题区 -->
+  <h1>MK体育 · 再次遇见</h1>
+  <div class="subhead">收藏此刻，保持关注 · 资讯与观点持续更新</div>
+
+  <!-- 主视觉卡片 —— 回访的起点 -->
+  <div class="hero-card">
+    <div class="hero-text">
+      <div class="bookmark-tip">📌 已收藏 · 常回来看看</div>
+      <h2>你的体育资讯标记点</h2>
+      <p>不论是从书签再次打开，还是忽然想浏览最新动态，这里都保持着你上次离开时的节奏。页面精简，信息直接，没有多余跳转。</p>
+    </div>
+    <div class="hero-visual">MK · 体育</div>
+  </div>
+
+  <!-- 用途卡片：三个信息面 -->
+  <div class="card-grid">
+    <div class="card">
+      <span class="icon-label">📋 信息聚合</span>
+      <h3>赛事动态速览</h3>
+      <p>聚焦主流联赛与重点赛事，比分、赛程、短评集中呈现，减少反复查找的步骤。</p>
+    </div>
+    <div class="card">
+      <span class="icon-label">📎 内容归档</span>
+      <h3>专题与复盘</h3>
+      <p>关键比赛日后的战术拆解、转会动向、数据回顾，内容保持克制且具有参考性。</p>
+    </div>
+    <div class="card">
+      <span class="icon-label">🔖 收藏友好</span>
+      <h3>稳定入口</h3>
+      <p>页面结构长期保持简洁，适合加入浏览器书签或快捷方式，再次访问时快速定位。</p>
+    </div>
+  </div>
+
+  <!-- 适合人群区块 -->
+  <div class="audience-box">
+    <h3>适合这样的人群持续关注</h3>
+    <div class="tag-list">
+      <span class="tag">⚽ 联赛跟踪者</span>
+      <span class="tag">🏀 赛果速查派</span>
+      <span class="tag">📰 资讯轻度读者</span>
+      <span class="tag">🧠 复盘爱好者</span>
+      <span class="tag">🔁 回访型用户</span>
+      <span class="tag">📌 收藏夹常客</span>
+    </div>
+  </div>
+
+  <!-- 引用块 / 提示  — 再次访问的体验 -->
+  <div class="inset-quote">
+    <strong>提示</strong> · 如果你习惯将常用站点保留在书签栏或主页快捷方式，不妨将 <strong>MK体育</strong> 加入其中。<br>
+    下次想了解近期赛况或浏览体育话题时，直接点开即可，不必重新搜索入口。信息密度适中，没有过度推送。
+  </div>
+
+  <!-- 自然链接段落 —— 嵌入 MK体育 链接 -->
+  <div class="link-paragraph">
+    对于持续关注体育动态的读者来说，一个内容集中且稳定的信息源能节省不少精力。
+    <a href="https://sitehome-mksports.com">MK体育</a> 在内容组织上兼顾了赛果与短评，同时保持相对克制的更新节奏。
+    如果你正在寻找一个可以直接收藏、不必每天被动接收通知的站点，它或许值得留在你的书签栏。
+  </div>
+
+  <!-- FAQ 摘要（简短三问） -->
+  <div class="faq-mini">
+    <div class="faq-item">
+      <div class="faq-q">▸ 再次访问时页面会变化很大吗？</div>
+      <div class="faq-a">核心板块保持统一，仅更新内容模块。你熟悉的导航和分类方式不会频繁改动。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">▸ 如何最快回到这个页面？</div>
+      <div class="faq-a">浏览器添加书签，或直接保存到主页快捷方式。也可记住域名 <a href="https://sitehome-mksports.com">MK体育</a> 直接输入。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">▸ 内容偏向哪些运动？</div>
+      <div class="faq-a">以足球、篮球为主，兼顾部分综合赛事与深度数据。不追求全品类覆盖，侧重信息实用性。</div>
+    </div>
+  </div>
+
+  <!-- 一行自然的结束语 -->
+  <hr>
+  <p style="color: #7a716b; font-size: 0.85rem; margin-top: 0.6rem;">
+    不断回访 · 持续关注 · MK体育
+  </p>
+
+</div>
+</body>
+</html>
